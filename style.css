@@ -1,0 +1,1185 @@
+/* Основные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary: #0a0e17;
+    --secondary: #1a1f2e;
+    --accent: #4a6fa5;
+    --accent-light: #6b93d6;
+    --text: #e0e0e0;
+    --text-light: #a0aec0;
+    --gold: #d4af37;
+    --physics: #9d4edd;
+    --astronomy: #4cc9f0;
+    --biology: #4caf50;
+    --success: #2ecc71;
+    --error: #e74c3c;
+}
+
+body {
+    background-color: var(--primary);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Анимация звезд */
+#stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* Шапка */
+header {
+    background: linear-gradient(to bottom, rgba(10, 14, 23, 0.95), rgba(10, 14, 23, 0.8));
+    padding: 25px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--accent);
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, var(--accent-light), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto 15px;
+    line-height: 1.5;
+}
+
+.deadline {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 15px 0;
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: rgba(212, 175, 55, 0.1);
+    border-radius: 20px;
+}
+
+/* Навигация */
+.desktop-nav {
+    margin-top: 20px;
+}
+
+.desktop-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.desktop-nav li {
+    margin: 0 5px;
+}
+
+.desktop-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+.desktop-nav a:hover {
+    color: var(--accent-light);
+    border-color: var(--accent);
+    background-color: rgba(74, 111, 165, 0.1);
+}
+
+.mobile-menu-btn {
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: var(--accent-light);
+    cursor: pointer;
+    z-index: 100;
+}
+
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 14, 23, 0.95);
+    z-index: 99;
+    padding-top: 80px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav.active {
+    transform: translateX(0);
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0 20px;
+}
+
+.mobile-nav li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border-left: 3px solid var(--accent);
+}
+
+.mobile-nav a:hover {
+    background-color: rgba(74, 111, 165, 0.2);
+}
+
+.mobile-nav i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Основной контент */
+main {
+    padding: 30px 0 60px;
+}
+
+section {
+    background-color: rgba(26, 31, 46, 0.7);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(74, 111, 165, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+h2 {
+    color: var(--accent-light);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--accent);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+}
+
+h2 i {
+    margin-right: 10px;
+}
+
+h3 {
+    color: var(--gold);
+    margin: 20px 0 10px;
+    font-size: 1.3rem;
+}
+
+p {
+    margin-bottom: 15px;
+    color: var(--text);
+}
+
+.highlight {
+    background-color: rgba(212, 175, 55, 0.1);
+    border-left: 4px solid var(--gold);
+    padding: 15px;
+    margin: 20px 0;
+    font-style: italic;
+    border-radius: 0 5px 5px 0;
+}
+
+.highlight i {
+    color: var(--gold);
+    margin: 0 5px;
+}
+
+/* Шаги конкурса */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.step {
+    background-color: rgba(10, 14, 23, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid rgba(74, 111, 165, 0.2);
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(to right, var(--accent), var(--accent-light));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Призы */
+.prizes {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.prize-card {
+    background-color: rgba(10, 14, 23, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(74, 111, 165, 0.2);
+}
+
+.prize-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent);
+}
+
+.book-cover {
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.book-cover.physics {
+    background: linear-gradient(135deg, var(--physics), #7b2cbf);
+}
+
+.book-cover.astronomy {
+    background: linear-gradient(135deg, var(--astronomy), #3a86ff);
+}
+
+.book-cover.biology {
+    background: linear-gradient(135deg, var(--biology), #2d6a4f);
+}
+
+.book-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.book-author {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.prize-info {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.physics-tag {
+    background-color: rgba(157, 78, 221, 0.2);
+    color: var(--physics);
+    border: 1px solid var(--physics);
+}
+
+.astronomy-tag {
+    background-color: rgba(76, 201, 240, 0.2);
+    color: var(--astronomy);
+    border: 1px solid var(--astronomy);
+}
+
+.biology-tag {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: var(--biology);
+    border: 1px solid var(--biology);
+}
+
+/* Категории */
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.category {
+    background-color: rgba(10, 14, 23, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid rgba(74, 111, 165, 0.2);
+}
+
+.category:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.category-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(to right, var(--accent), var(--accent-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.contact-info {
+    background-color: rgba(10, 14, 23, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 25px;
+    border: 1px solid var(--accent);
+}
+
+.contact-email {
+    color: var(--accent-light);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Форма */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--accent-light);
+    font-weight: 500;
+}
+
+label i {
+    margin-right: 8px;
+    width: 16px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: rgba(10, 14, 23, 0.7);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: var(--text);
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-light);
+    box-shadow: 0 0 0 2px rgba(107, 147, 214, 0.2);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.char-count {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+.file-upload-area {
+    padding: 30px 20px;
+    background-color: rgba(10, 14, 23, 0.5);
+    border: 2px dashed var(--accent);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-upload-area:hover {
+    background-color: rgba(10, 14, 23, 0.8);
+    border-color: var(--accent-light);
+}
+
+.file-upload-area i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.file-info {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+.file-name {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(10, 14, 23, 0.5);
+    border-radius: 5px;
+    border-left: 3px solid var(--accent);
+}
+
+.checkbox {
+    display: flex;
+    align-items: flex-start;
+}
+
+.checkbox input {
+    width: auto;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.checkbox label {
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.submit-btn {
+    background: linear-gradient(to right, var(--accent), var(--accent-light));
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.submit-btn i {
+    margin-right: 10px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, var(--accent-light), var(--accent));
+    box-shadow: 0 5px 15px rgba(107, 147, 214, 0.4);
+    transform: translateY(-2px);
+}
+
+.alternative-submit {
+    text-align: center;
+    margin-top: 15px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Футер */
+footer {
+    background-color: rgba(10, 14, 23, 0.9);
+    padding: 40px 0 20px;
+    border-top: 1px solid var(--accent);
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h3 {
+    color: var(--accent-light);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section li {
+    margin-bottom: 8px;
+    color: var(--text-light);
+}
+
+.footer-section i {
+    margin-right: 10px;
+    color: var(--accent);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(74, 111, 165, 0.2);
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    border: 1px solid var(--accent);
+    position: relative;
+    text-align: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--accent-light);
+}
+
+.modal-icon {
+    font-size: 4rem;
+    color: var(--success);
+    margin-bottom: 20px;
+}
+
+.modal-btn {
+    background: linear-gradient(to right, var(--accent), var(--accent-light));
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.modal-btn:hover {
+    background: linear-gradient(to right, var(--accent-light), var(--accent));
+}
+
+/* Стили для обложек книг */
+.book-cover {
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.prize-card:hover .book-image {
+    transform: scale(1.05);
+}
+
+.book-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: white;
+    padding: 20px 15px 15px;
+    text-align: center;
+}
+
+.book-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.book-author {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.category-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.physics-badge {
+    background-color: rgba(157, 78, 221, 0.8);
+    color: white;
+    border: 1px solid var(--physics);
+}
+
+.astronomy-badge {
+    background-color: rgba(76, 201, 240, 0.8);
+    color: white;
+    border: 1px solid var(--astronomy);
+}
+
+.biology-badge {
+    background-color: rgba(76, 175, 80, 0.8);
+    color: white;
+    border: 1px solid var(--biology);
+}
+
+/* Добавьте эти стили в конец файла CSS */
+
+/* Статус загрузки файла */
+.upload-progress {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: rgba(10, 14, 23, 0.5);
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent), var(--accent-light));
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.progress-text span {
+    color: var(--accent-light);
+    font-weight: bold;
+}
+
+/* Статус формы */
+.form-status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.form-status.success {
+    display: block;
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid var(--success);
+    color: var(--success);
+}
+
+/* Стили для облачной загрузки */
+.cloud-upload-instructions {
+    background-color: rgba(10, 14, 23, 0.5);
+    border-radius: 10px;
+    padding: 25px;
+    border: 1px solid var(--accent);
+}
+
+.instruction-box {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(74, 111, 165, 0.3);
+}
+
+.instruction-box h4 {
+    color: var(--accent-light);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.steps {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.steps li {
+    margin-bottom: 10px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.cloud-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cloud-service {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s ease;
+}
+
+.cloud-service:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.service-icon {
+    font-size: 2rem;
+}
+
+.cloud-service:nth-child(1) .service-icon { color: #4285F4; } /* Google Drive */
+.cloud-service:nth-child(2) .service-icon { color: #FF0000; } /* Яндекс.Диск */
+.cloud-service:nth-child(3) .service-icon { color: #0061FF; } /* Dropbox */
+
+.service-name {
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.service-hint {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.url-input-container {
+    margin: 25px 0;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background-color: rgba(10, 14, 23, 0.7);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.input-with-icon input:focus {
+    border-color: var(--accent-light);
+    box-shadow: 0 0 0 3px rgba(107, 147, 214, 0.2);
+    outline: none;
+}
+
+.input-with-icon input:valid {
+    border-color: var(--success);
+}
+
+.input-with-icon input:invalid:not(:placeholder-shown) {
+    border-color: var(--error);
+}
+
+.url-validation {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.url-validation.valid {
+    display: block;
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success);
+    border-left: 3px solid var(--success);
+}
+
+.url-validation.invalid {
+    display: block;
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--error);
+    border-left: 3px solid var(--error);
+}
+
+.url-notes {
+    background-color: rgba(212, 175, 55, 0.1);
+    border-left: 4px solid var(--gold);
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+}
+
+.note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.note:last-child {
+    margin-bottom: 0;
+}
+
+.note i {
+    color: var(--gold);
+    margin-top: 3px;
+}
+
+.form-description {
+    background-color: rgba(74, 111, 165, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 4px solid var(--accent);
+    color: var(--text);
+}
+
+.form-description i {
+    color: var(--accent-light);
+    margin-right: 10px;
+}
+
+/* Адаптивность для облачных сервисов */
+@media (max-width: 768px) {
+    .cloud-services {
+        grid-template-columns: 1fr;
+    }
+    
+    .instruction-box {
+        padding: 15px;
+    }
+    
+    .cloud-upload-instructions {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-icon {
+        font-size: 1.5rem;
+    }
+    
+    .cloud-service {
+        padding: 12px;
+    }
+}
+
+.form-status.error {
+    display: block;
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--error);
+    color: var(--error);
+}
+
+.form-status.loading {
+    display: block;
+    background-color: rgba(74, 111, 165, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent-light);
+}
+
+/* Стили для отключенной кнопки */
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Улучшенное модальное окно */
+.modal-content {
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-icon.success {
+    color: var(--success);
+}
+
+.modal-icon.error {
+    color: var(--error);
+}
+
+.modal-btn.secondary {
+    background: transparent;
+    border: 1px solid var(--accent);
+    margin-left: 10px;
+}
+
+.book-details {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.detail-item i {
+    color: var(--accent);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .book-cover {
+        min-width: 100%;
+        height: 200px;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .prize-card {
+        flex-direction: column;
+    }
+    
+    .book-overlay {
+        padding: 15px 10px 10px;
+    }
+    
+    .book-title {
+        font-size: 1rem;
+    }
+    
+    .book-author {
+        font-size: 0.8rem;
+    }
+}
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 1.9rem;
+    }
+    
+    .steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .prize-card {
+        flex-direction: column;
+    }
+    
+    .book-cover {
+        min-width: 100%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .desktop-nav {
+        display: none;
+    }
+    
+    h1 {
+        font-size: 1.7rem;
+        padding-right: 40px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    section {
+        padding: 20px;
+    }
+    
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    
+    
+    .categories {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    .deadline {
+        font-size: 1rem;
+    }
+    
+    .submit-btn {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+}
