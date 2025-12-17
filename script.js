@@ -1,25 +1,21 @@
-// Анимация звезд с движением
+// ================ АНИМАЦИЯ ЗВЕЗД ================
+
+// Создание звезд с движением
 function createStars() {
     const starsContainer = document.getElementById('stars');
     const starCount = 150;
     
-    // Очищаем контейнер
     starsContainer.innerHTML = '';
     
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
         star.classList.add('star');
         
-        // Случайные параметры для звезд
         const size = Math.random() * 3 + 1;
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
-        
-        // Разные скорости движения
         const speedX = (Math.random() - 0.5) * 0.5;
         const speedY = (Math.random() - 0.5) * 0.3;
-        
-        // Разное время для мерцания
         const duration = Math.random() * 10 + 5;
         const delay = Math.random() * 5;
         
@@ -29,19 +25,15 @@ function createStars() {
         star.style.top = `${posY}%`;
         star.style.opacity = Math.random() * 0.7 + 0.3;
         
-        // Сохраняем параметры движения в dataset
         star.dataset.speedX = speedX;
         star.dataset.speedY = speedY;
         star.dataset.posX = posX;
         star.dataset.posY = posY;
-        
-        // Добавляем анимацию мерцания
         star.style.animation = `twinkle ${duration}s infinite ${delay}s`;
         
         starsContainer.appendChild(star);
     }
     
-    // Запускаем движение звезд
     moveStars();
 }
 
@@ -61,21 +53,16 @@ function moveStars() {
             const speedX = parseFloat(star.dataset.speedX);
             const speedY = parseFloat(star.dataset.speedY);
             
-            // Обновляем позицию
             posX += speedX * deltaTime * 0.01;
             posY += speedY * deltaTime * 0.01;
             
-            // Если звезда ушла за границы, возвращаем ее
             if (posX > 100) posX = 0;
             if (posX < 0) posX = 100;
             if (posY > 100) posY = 0;
             if (posY < 0) posY = 100;
             
-            // Сохраняем новую позицию
             star.dataset.posX = posX;
             star.dataset.posY = posY;
-            
-            // Применяем новую позицию
             star.style.left = `${posX}%`;
             star.style.top = `${posY}%`;
         });
@@ -96,7 +83,8 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Мобильное меню
+// ================ МОБИЛЬНОЕ МЕНЮ ================
+
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileNav = document.getElementById('mobileNav');
 
@@ -108,7 +96,6 @@ if (mobileMenuBtn && mobileNav) {
             : '<i class="fas fa-bars"></i>';
     });
     
-    // Закрытие меню при клике на ссылку
     const mobileLinks = mobileNav.querySelectorAll('a');
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -118,64 +105,463 @@ if (mobileMenuBtn && mobileNav) {
     });
 }
 
-// Обработка загрузки файла
-const fileUploadArea = document.getElementById('fileUploadArea');
-const fileInput = document.getElementById('file');
-const fileName = document.getElementById('fileName');
+// ================ ВАЛИДАЦИЯ URL ================
 
-if (fileUploadArea && fileInput) {
-    // Клик по области загрузки
-    fileUploadArea.addEventListener('click', () => {
-        fileInput.click();
-    });
-    
-    // Изменение файла
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            const file = e.target.files[0];
-            const fileSize = file.size / 1024 / 1024; // Размер в MB
+const fileUrlInput = document.getElementById('file-url');
+const urlValidation = document.getElementById('urlValidation');
+
+if (fileUrlInput) {
+    fileUrlInput.addEventListener('input', () => {
+        const url = fileUrlInput.value;
+        
+        if (url.length === 0) {
+            urlValidation.style.display = 'none';
+            return;
+        }
+        
+        // Проверяем, является ли строка URL
+        try {
+            new URL(url);
             
-            // Проверка размера файла
-            if (fileSize > 10) {
-                alert('Файл слишком большой! Максимальный размер: 10MB');
-                fileInput.value = '';
-                fileName.textContent = '';
-                return;
+            // Проверяем, что это URL облачных хранилищ
+            const allowedDomains = [
+                'drive.google.com',
+                'docs.google.com',
+                'yadi.sk',
+                'disk.yandex.ru',
+                'yandex.ru/disk',
+                'dropbox.com',
+                'onedrive.live.com',
+                'cloud.mail.ru'
+            ];
+            
+            const urlObj = new URL(url);
+            const isValidDomain = allowedDomains.some(domain => urlObj.hostname.includes(domain));
+            
+            if (isValidDomain) {
+                urlValidation.textContent = '✓ Ссылка выглядит корректной';
+                urlValidation.className = 'url-validation valid';
+                urlValidation.style.display = 'block';
+                fileUrlInput.style.borderColor = 'var(--success)';
+            } else {
+                urlValidation.textContent = '⚠ Убедитесь, что ссылка ведет на облачное хранилище (Google Drive, Яндекс.Диск, Dropbox)';
+                urlValidation.className = 'url-validation invalid';
+                urlValidation.style.display = 'block';
+                fileUrlInput.style.borderColor = 'var(--gold)';
             }
             
-            fileName.textContent = `Выбран файл: ${file.name} (${fileSize.toFixed(2)} MB)`;
-            fileName.style.color = 'var(--success)';
-        } else {
-            fileName.textContent = '';
+        } catch (error) {
+            urlValidation.textContent = '✗ Пожалуйста, введите корректную ссылку (начинается с https://)';
+            urlValidation.className = 'url-validation invalid';
+            urlValidation.style.display = 'block';
+            fileUrlInput.style.borderColor = 'var(--error)';
         }
     });
     
-    // Drag and drop
-    fileUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.backgroundColor = 'rgba(10, 14, 23, 0.9)';
-        fileUploadArea.style.borderColor = 'var(--accent-light)';
-    });
-    
-    fileUploadArea.addEventListener('dragleave', () => {
-        fileUploadArea.style.backgroundColor = '';
-        fileUploadArea.style.borderColor = '';
-    });
-    
-    fileUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.backgroundColor = '';
-        fileUploadArea.style.borderColor = '';
-        
-        if (e.dataTransfer.files.length > 0) {
-            fileInput.files = e.dataTransfer.files;
-            const event = new Event('change', { bubbles: true });
-            fileInput.dispatchEvent(event);
+    // Проверка при потере фокуса
+    fileUrlInput.addEventListener('blur', () => {
+        if (fileUrlInput.value && !fileUrlInput.validity.valid) {
+            urlValidation.textContent = '✗ Введите корректный URL (например: https://drive.google.com/file/d/...)';
+            urlValidation.className = 'url-validation invalid';
+            urlValidation.style.display = 'block';
         }
     });
 }
 
-// Подсчет символов в текстовом поле
+// ================ EMAILJS ИНИЦИАЛИЗАЦИЯ ================
+
+// Инициализация EmailJS
+(function() {
+    emailjs.init("UTY33QAerXaGEK-Nm");
+})();
+
+// ================ ОБРАБОТЧИК ФОРМЫ (ОБЛАЧНЫЙ ВАРИАНТ) ================
+
+const articleForm = document.getElementById('article-form');
+
+if (articleForm) {
+    articleForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Проверяем обязательные поля
+        const requiredFields = articleForm.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.style.borderColor = 'var(--error)';
+                
+                field.addEventListener('input', () => {
+                    field.style.borderColor = 'var(--accent)';
+                });
+            }
+        });
+        
+        // Специальная проверка для URL
+        if (!fileUrlInput.value.trim()) {
+            isValid = false;
+            fileUrlInput.style.borderColor = 'var(--error)';
+            
+            fileUrlInput.addEventListener('input', () => {
+                fileUrlInput.style.borderColor = 'var(--accent)';
+            });
+        }
+        
+        if (!isValid) {
+            showFormStatus('Пожалуйста, заполните все обязательные поля', 'error');
+            return;
+        }
+        
+        // Проверяем согласие с условиями
+        const termsCheckbox = document.getElementById('terms');
+        if (!termsCheckbox.checked) {
+            showFormStatus('Необходимо согласие с условиями конкурса', 'error');
+            termsCheckbox.focus();
+            return;
+        }
+        
+        // Проверяем валидность URL
+        if (!fileUrlInput.validity.valid) {
+            showFormStatus('Пожалуйста, введите корректную ссылку на файл', 'error');
+            fileUrlInput.focus();
+            return;
+        }
+        
+        // Отключаем кнопку отправки
+        const submitBtn = document.getElementById('submitBtn');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+        
+        // Показываем статус загрузки
+        showFormStatus('Отправка заявки...', 'loading');
+        
+        try {
+            // Собираем данные формы
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                category: document.getElementById('category').value,
+                title: document.getElementById('title').value,
+                content: document.getElementById('article-text').value,
+                file_url: fileUrlInput.value
+            };
+            
+            // Проверяем, что URL доступен
+            await testUrlAccessibility(formData.file_url);
+            
+            // Отправляем через EmailJS
+            const emailResult = await sendEmailToOrganizer(formData);
+            
+            if (emailResult.success) {
+                showSuccessModal(formData);
+                showFormStatus('Заявка успешно отправлена!', 'success');
+                
+                // Очищаем форму
+                articleForm.reset();
+                charCount.textContent = '0';
+                charCount.style.color = 'var(--text-light)';
+                urlValidation.style.display = 'none';
+            } else {
+                throw new Error(emailResult.message);
+            }
+            
+        } catch (error) {
+            console.error('Ошибка:', error);
+            showFormStatus(`Ошибка: ${error.message}`, 'error');
+            
+            // Показываем модальное окно с ошибкой
+            showErrorModal(error.message);
+            
+        } finally {
+            // Восстанавливаем кнопку
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
+    });
+}
+
+// ================ ФУНКЦИЯ ПРОВЕРКИ ДОСТУПНОСТИ URL ================
+
+async function testUrlAccessibility(url) {
+    return new Promise((resolve, reject) => {
+        // В реальном проекте здесь будет реальная проверка URL
+        // Для демонстрации просто разрешаем
+        setTimeout(() => {
+            resolve(true);
+        }, 500);
+    });
+}
+
+// ================ ФУНКЦИЯ ОТПРАВКИ EMAIL ================
+
+async function sendEmailToOrganizer(formData) {
+    const templateParams = {
+        from_name: formData.name,
+        user_email: formData.email,
+        article_category: formData.category,
+        article_title: formData.title,
+        article_content: formData.content,
+        article_file: formData.file_url,
+        to_email: "gemiandrui@gmail.com",
+        submission_date: new Date().toLocaleDateString('ru-RU'),
+        submission_time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+    };
+
+    try {
+        // Отправляем письмо через EmailJS
+        const response = await emailjs.send(
+            "service_9g7zkce",
+            "template_0owa5yd",
+            templateParams
+        );
+        
+        return { success: true, message: "Заявка отправлена!" };
+        
+    } catch (error) {
+        console.error("Ошибка отправки письма:", error);
+        return { 
+            success: false, 
+            message: `Ошибка отправки: ${error.text || "Неизвестная ошибка"}` 
+        };
+    }
+}
+
+// ================ ПОКАЗ УСПЕШНОГО МОДАЛЬНОГО ОКНА ================
+
+function showSuccessModal(formData) {
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Заявка отправлена успешно!</h3>
+            <p>Ваша статья "${formData.title}" отправлена на конкурс в категории "${formData.category}".</p>
+            <p>Мы свяжемся с вами по email <strong>${formData.email}</strong> после проверки заявки.</p>
+            
+            <div class="submission-details">
+                <h4><i class="fas fa-info-circle"></i> Детали вашей заявки:</h4>
+                <ul>
+                    <li><strong>ФИО:</strong> ${formData.name}</li>
+                    <li><strong>Ссылка на файл:</strong> <a href="${formData.file_url}" target="_blank" style="color: var(--accent-light); word-break: break-all;">${formData.file_url.substring(0, 50)}...</a></li>
+                    <li><strong>Дата отправки:</strong> ${new Date().toLocaleDateString('ru-RU')}</li>
+                </ul>
+            </div>
+            
+            <div class="next-steps">
+                <h4><i class="fas fa-list-ol"></i> Что дальше?</h4>
+                <ol>
+                    <li>Мы проверим вашу заявку в течение 3 рабочих дней</li>
+                    <li>Если статья соответствует требованиям, она будет допущена к конкурсу</li>
+                    <li>О результатах отбора вы узнаете по email</li>
+                    <li>Финал конкурса и голосование пройдут после 15 января 2026 года</li>
+                </ol>
+            </div>
+            
+            <button class="modal-btn" id="closeSuccessModal">
+                <i class="fas fa-check"></i> Понятно
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Обработчики закрытия
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.remove();
+        document.body.style.overflow = '';
+    });
+    
+    modal.querySelector('#closeSuccessModal').addEventListener('click', () => {
+        modal.remove();
+        document.body.style.overflow = '';
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// ================ ФУНКЦИЯ ДЛЯ ПОКАЗА СТАТУСА ================
+
+function showFormStatus(message, type = 'info') {
+    const statusElement = document.getElementById('formStatus');
+    if (!statusElement) return;
+    
+    statusElement.textContent = message;
+    statusElement.className = `form-status ${type}`;
+    
+    if (type === 'success') {
+        setTimeout(() => {
+            statusElement.style.display = 'none';
+        }, 5000);
+    }
+}
+
+// ================ ФУНКЦИЯ ДЛЯ ПОКАЗА ОШИБКИ ================
+
+function showErrorModal(errorMessage) {
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon error">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3>Ошибка отправки</h3>
+            <p>${errorMessage}</p>
+            <p>Пожалуйста, попробуйте еще раз или отправьте статью напрямую на <strong>gemiandrui@gmail.com</strong></p>
+            <div style="margin-top: 20px;">
+                <button class="modal-btn" id="closeErrorModal">Закрыть</button>
+                <button class="modal-btn secondary" id="retryBtn">Попробовать снова</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Обработчики для модального окна с ошибкой
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.remove();
+    });
+    
+    modal.querySelector('#closeErrorModal').addEventListener('click', () => {
+        modal.remove();
+    });
+    
+    modal.querySelector('#retryBtn').addEventListener('click', () => {
+        modal.remove();
+        document.getElementById('article-form').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Закрытие при клике вне окна
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
+
+// ================ ФУНКЦИИ ДЛЯ ОБЛАЧНЫХ СЕРВИСОВ ================
+
+// Добавляем обработчики для кнопок облачных сервисов
+document.addEventListener('DOMContentLoaded', () => {
+    // Google Drive
+    const googleDriveBtn = document.getElementById('googleDriveBtn');
+    if (googleDriveBtn) {
+        googleDriveBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCloudInstructions('Google Drive', 'https://drive.google.com');
+        });
+    }
+    
+    // Яндекс.Диск
+    const yandexDiskBtn = document.getElementById('yandexDiskBtn');
+    if (yandexDiskBtn) {
+        yandexDiskBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCloudInstructions('Яндекс.Диск', 'https://disk.yandex.ru');
+        });
+    }
+    
+    // Dropbox
+    const dropboxBtn = document.getElementById('dropboxBtn');
+    if (dropboxBtn) {
+        dropboxBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCloudInstructions('Dropbox', 'https://www.dropbox.com');
+        });
+    }
+});
+
+function showCloudInstructions(serviceName, serviceUrl) {
+    const modal = document.createElement('div');
+    modal.className = 'modal active';
+    
+    let instructions = '';
+    if (serviceName === 'Google Drive') {
+        instructions = `
+            <ol>
+                <li>Загрузите файл на Google Drive</li>
+                <li>Нажмите правой кнопкой на файл → "Предоставить доступ"</li>
+                <li>Выберите "Доступ по ссылке" (Anyone with the link)</li>
+                <li>Скопируйте ссылку и вставьте в форму</li>
+                <li>Настройте доступ: "Может просматривать" или "Может комментировать"</li>
+            </ol>
+        `;
+    } else if (serviceName === 'Яндекс.Диск') {
+        instructions = `
+            <ol>
+                <li>Загрузите файл на Яндекс.Диск</li>
+                <li>Нажмите на файл → "Поделиться"</li>
+                <li>Включите "Доступ по ссылке"</li>
+                <li>Скопируйте ссылку и вставьте в форму</li>
+                <li>Убедитесь, что стоит галочка "Разрешить скачивание"</li>
+            </ol>
+        `;
+    } else if (serviceName === 'Dropbox') {
+        instructions = `
+            <ol>
+                <li>Загрузите файл в Dropbox</li>
+                <li>Наведите на файл → нажмите "Поделиться"</li>
+                <li>Выберите "Создать ссылку"</li>
+                <li>Скопируйте ссылку и вставьте в форму</li>
+                <li>Убедитесь, что доступ разрешен для "Anyone with the link"</li>
+            </ol>
+        `;
+    }
+    
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h3>Инструкция для ${serviceName}</h3>
+            ${instructions}
+            <div class="modal-buttons">
+                <a href="${serviceUrl}" target="_blank" class="modal-btn primary">
+                    <i class="fas fa-external-link-alt"></i> Перейти в ${serviceName}
+                </a>
+                <button class="modal-btn secondary" id="closeCloudModal">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.remove();
+        document.body.style.overflow = '';
+    });
+    
+    modal.querySelector('#closeCloudModal').addEventListener('click', () => {
+        modal.remove();
+        document.body.style.overflow = '';
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// ================ ПОДСЧЕТ СИМВОЛОВ ================
+
 const articleText = document.getElementById('article-text');
 const charCount = document.getElementById('charCount');
 
@@ -197,101 +583,25 @@ if (articleText && charCount) {
     });
 }
 
-// Обработка отправки формы
-const articleForm = document.getElementById('article-form');
-const successModal = document.getElementById('successModal');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const closeModal = document.querySelector('.close-modal');
+// ================ ВАЛИДАЦИЯ EMAIL ================
 
-if (articleForm) {
-    articleForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+const emailInput = document.getElementById('email');
+if (emailInput) {
+    emailInput.addEventListener('blur', () => {
+        const email = emailInput.value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
-        // Проверяем обязательные поля
-        const requiredFields = articleForm.querySelectorAll('[required]');
-        let isValid = true;
-        
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                isValid = false;
-                field.style.borderColor = 'var(--error)';
-                
-                // Убираем подсветку при исправлении
-                field.addEventListener('input', () => {
-                    field.style.borderColor = 'var(--accent)';
-                });
-            }
-        });
-        
-        // Проверяем файл
-        if (!fileInput.files.length) {
-            isValid = false;
-            fileUploadArea.style.borderColor = 'var(--error)';
-            fileUploadArea.style.borderStyle = 'solid';
-            
-            fileInput.addEventListener('change', () => {
-                fileUploadArea.style.borderColor = '';
-                fileUploadArea.style.borderStyle = '';
-            });
+        if (email && !emailRegex.test(email)) {
+            showFormStatus('Пожалуйста, введите корректный email адрес', 'error');
+            emailInput.style.borderColor = 'var(--error)';
+        } else {
+            emailInput.style.borderColor = 'var(--accent)';
         }
-        
-        if (!isValid) {
-            alert('Пожалуйста, заполните все обязательные поля и прикрепите файл со статьей');
-            return;
-        }
-        
-        // Проверяем согласие с условиями
-        const termsCheckbox = document.getElementById('terms');
-        if (!termsCheckbox.checked) {
-            alert('Необходимо согласие с условиями конкурса');
-            termsCheckbox.focus();
-            return;
-        }
-        
-        // В реальном приложении здесь был бы AJAX-запрос на сервер
-        // Для демо просто показываем модальное окно
-        showSuccessModal();
-        
-        // Очищаем форму
-        articleForm.reset();
-        fileName.textContent = '';
-        charCount.textContent = '0';
-        charCount.style.color = 'var(--text-light)';
     });
 }
 
-// Показ модального окна успеха
-function showSuccessModal() {
-    if (successModal) {
-        successModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
+// ================ ПЛАВНАЯ ПРОКРУТКА ================
 
-// Закрытие модального окна
-if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', () => {
-        successModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-if (closeModal) {
-    closeModal.addEventListener('click', () => {
-        successModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-// Закрытие модального окна при клике вне его
-successModal.addEventListener('click', (e) => {
-    if (e.target === successModal) {
-        successModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
-
-// Плавная прокрутка к якорям
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -301,7 +611,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            // Закрываем мобильное меню, если оно открыто
             if (mobileNav && mobileNav.classList.contains('active')) {
                 mobileNav.classList.remove('active');
                 mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
@@ -315,11 +624,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Инициализация при загрузке страницы
+// ================ ИНИЦИАЛИЗАЦИЯ ================
+
 document.addEventListener('DOMContentLoaded', () => {
     createStars();
     
-    // Добавляем класс для анимации появления элементов
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         section.style.opacity = '0';
@@ -327,7 +636,6 @@ document.addEventListener('DOMContentLoaded', () => {
         section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     });
     
-    // Анимация появления при скролле
     function animateOnScroll() {
         sections.forEach(section => {
             const sectionTop = section.getBoundingClientRect().top;
@@ -340,11 +648,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Запускаем сразу и при скролле
     animateOnScroll();
     window.addEventListener('scroll', animateOnScroll);
     
-    // Анимация появления при загрузке
     setTimeout(() => {
         sections.forEach(section => {
             section.style.opacity = '1';
@@ -353,7 +659,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
 });
 
-// Адаптация звезд при изменении размера окна
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
