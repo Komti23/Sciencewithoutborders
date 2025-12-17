@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наука без границ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Анимированный фон со звездами -->
+    <div id="stars"></div>
+    
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <h1>Конкурс научных статей "Наука без границ"</h1>
+            <p class="subtitle">Многие люди хотят рассказать о чём-то из мира науки, но не могут этого сделать. Мы даём такую возможность!</p>
+            <p class="deadline">Приём работ до: 15 января 2026 года</p>
+            
+            <!-- Мобильная навигация -->
+            <nav class="mobile-nav" id="mobileNav">
+                <ul>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> О конкурсе</a></li>
+                    <li><a href="#prizes"><i class="fas fa-trophy"></i> Призы</a></li>
+                    <li><a href="#participate"><i class="fas fa-pen-fancy"></i> Участие</a></li>
+                    <li><a href="#form"><i class="fas fa-paper-plane"></i> Отправить</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Десктопная навигация -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#about">О конкурсе</a></li>
+                    <li><a href="#prizes">Призы</a></li>
+                    <li><a href="#participate">Участие</a></li>
+                    <li><a href="#form">Отправить статью</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- О конкурсе -->
+        <section id="about">
+            <h2><i class="fas fa-microscope"></i> О конкурсе</h2>
+            <p>Каждый из нас сталкивался с удивительными научными фактами, которые хотелось бы обсудить с другими. Возможно, вас волнуют загадки квантовой механики, тайны далёких галактик или удивительные механизмы эволюции жизни на Земле.</p>
+            
+            <div class="highlight">
+                <p><i class="fas fa-quote-left"></i> Принять участие может любой человек из России. Пишите на любую тему, которая вас волнует или интересует, и делитесь своими открытиями с другими людьми! <i class="fas fa-quote-right"></i></p>
+            </div>
+            
+            <p>После окончания приёма статей, лучшие работы будут отобраны для участия в финале. Победитель определится путём открытого голосования. Статья победителя будет опубликована на нашем сайте, а автор получит ценную научно-популярную книгу по выбранному профилю.</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Напишите статью</h3>
+                    <p>Выберите тему из физики, астрономии или биологии и напишите статью</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Отправьте до 15.01.2026</h3>
+                    <p>Отправьте статью через форму на сайте или на почту</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Голосование</h3>
+                    <p>Лучшие статьи пройдут в финал и будут участвовать в голосовании</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Награждение</h3>
+                    <p>Победитель получит книгу, а его статья будет опубликована</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Призы -->
+        <section id="prizes">
+            <h2><i class="fas fa-trophy"></i> Награды победителям</h2>
+            <p>Победитель в каждой категории получит одну из этих замечательных книг:</p>
+            
+            <div class="prizes">
+    <!-- Физика -->
+    <div class="prize-card">
+        <div class="book-cover">
+            <img src="images/physics-book.png" alt="Обложка книги: Сто лет недосказанности" class="book-image">
+            <div class="book-overlay">
+                <div class="book-title">Сто лет недосказанности</div>
+                <div class="book-author">Алексей Семихатов</div>
+            </div>
+            <div class="category-badge physics-badge">
+                <i class="fas fa-atom"></i> Физика
+            </div>
+        </div>
+        <div class="prize-info">
+            <h3>Физика</h3>
+            <p><strong>Книга:</strong> "Сто лет недосказанности: Квантовая механика для всех в 25 эссе"</p>
+            <p>Книга выходит в год столетия квантовой механики и предлагает последовательное изложение современного состояния этой науки. Автор объясняет, как устроен квантовый компьютер, почему может работать квантовая телепортация и что такое квантовая теория поля.</p>
+            <div class="book-details">
+                <span class="detail-item"><i class="fas fa-calendar"></i> 2024 г.</span>
+                <span class="detail-item"><i class="fas fa-book-open"></i> 25 эссе</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Астрономия -->
+    <div class="prize-card">
+        <div class="book-cover">
+            <img src="images/astronomy-book.png"далёких планет" class="book-image">
+            <div class="book-overlay">
+                <div class="book-title">Разведка далёких планет</div>
+                <div class="book-author">Владимир Сурдин</div>
+            </div>
+            <div class="category-badge astronomy-badge">
+                <i class="fas fa-star"></i> Астрономия
+            </div>
+        </div>
+        <div class="prize-info">
+            <h3>Астрономия</h3>
+            <p><strong>Книга:</strong> "Разведка далёких планет"</p>
+            <p>Мечта каждого астронома — открыть новую планету. В книге рассказано о том, как велись и ведутся поиски больших и маленьких планет в Солнечной системе и вдали от неё, какая техника для этого используется, что помогает и что мешает астрономам в этой работе.</p>
+            <div class="book-details">
+                <span class="detail-item"><i class="fas fa-calendar"></i> 2025 г.</span>
+                <span class="detail-item"><i class="fas fa-satellite"></i> Исследования</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Биология -->
+    <div class="prize-card">
+        <div class="book-cover">
+            <img src="images/biology-book.png" alt="Обложка книги: Хлопок одной ладонью" class="book-image">
+            <div class="book-overlay">
+                <div class="book-title">Хлопок одной ладонью</div>
+                <div class="book-author">Николай Кукушкин</div>
+            </div>
+            <div class="category-badge biology-badge">
+                <i class="fas fa-dna"></i> Биология
+            </div>
+        </div>
+        <div class="prize-info">
+            <h3>Биология</h3>
+            <p><strong>Книга:</strong> "Хлопок одной ладонью: Как неживая природа породила человеческий разум"</p>
+            <p>Эволюционный нейробиолог Николай Кукушкин шаг за шагом воссоздаёт картину мира от неживой материи до человеческого разума. Оказывается, в человеческом страдании виноваты динозавры, легкие существуют благодаря лишайникам.</p>
+            <div class="book-details">
+                <span class="detail-item"><i class="fas fa-calendar"></i> 2020 г.</span>
+                <span class="detail-item"><i class="fas fa-brain"></i> Эволюция</span>
+            </div>
+        </div>
+    </div>
+</div>
+        </section>
+        
+        <!-- Участие -->
+        <section id="participate">
+            <h2><i class="fas fa-pen-fancy"></i> Как принять участие</h2>
+            <p>Для участия в конкурсе необходимо отправить свою научную статью на одну из тем:</p>
+            
+            <div class="categories">
+                <div class="category">
+                    <div class="category-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>Физика</h3>
+                    <p>Любые темы, связанные с физическими явлениями, законами природы, современными исследованиями</p>
+                </div>
+                <div class="category">
+                    <div class="category-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Астрономия</h3>
+                    <p>Космос, планеты, звёзды, галактики, современные астрономические открытия</p>
+                </div>
+                <div class="category">
+                    <div class="category-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3>Биология</h3>
+                    <p>Живая природа, эволюция, экосистемы, организм человека, современные биологические исследования</p>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p><i class="fas fa-calendar-alt"></i> Статьи принимаются до <strong>15 января 2026 года</strong>. После отбора статей будет проведено голосование, в котором и определят победителя. Статья победителя будет опубликована на сайте и отправлена книга.</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3><i class="fas fa-envelope"></i> Контактная информация</h3>
+                <p>Отправляйте свои статьи на почту: <span class="contact-email">gemiandrui@gmail.com</span></p>
+                <p>В теме письма укажите: <strong>"Конкурс статей: [Категория] - [Название статьи]"</strong></p>
+            </div>
+        </section>
+        
+        <!-- Форма отправки статьи -->
+        <section id="form">
+    <h2><i class="fas fa-paper-plane"></i> Отправить статью на конкурс</h2>
+    <p class="form-description">
+        <i class="fas fa-info-circle"></i> После заполнения формы вы получите письмо с инструкцией. 
+        Или сразу отправьте статью напрямую на <strong>gemiandrui@gmail.com</strong>
+    </p>
+    
+    <form id="article-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name"><i class="fas fa-user"></i> ФИО автора *</label>
+                <input type="text" id="name" name="name" required placeholder="Иванов Иван Иванович">
+            </div>
+            
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email для связи *</label>
+                <input type="email" id="email" name="email" required placeholder="example@mail.ru">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="category"><i class="fas fa-tag"></i> Категория статьи *</label>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Выберите категорию</option>
+                <option value="Физика">Физика</option>
+                <option value="Астрономия">Астрономия</option>
+                <option value="Биология">Биология</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="title"><i class="fas fa-heading"></i> Название статьи *</label>
+            <input type="text" id="title" name="title" required placeholder="Удивительный мир квантовой механики">
+        </div>
+        
+        <div class="form-group">
+            <label for="article-text"><i class="fas fa-align-left"></i> Краткое содержание статьи *</label>
+            <textarea id="article-text" name="article-text" rows="6" required placeholder="Введите краткое содержание вашей статьи (максимум 500 слов)..."></textarea>
+            <div class="char-count"><span id="charCount">0</span> / 3000 символов</div>
+        </div>
+        
+        <!-- ЗАМЕНИЛИ ЗАГРУЗКУ ФАЙЛА НА ССЫЛКУ -->
+            <div class="form-group">
+                <label><i class="fas fa-link"></i> Ссылка на файл статьи в облаке *</label>
+                <div class="cloud-upload-instructions">
+                    <div class="instruction-box">
+                        <h4><i class="fas fa-cloud-upload-alt"></i> Как загрузить файл:</h4>
+                        <ol class="steps">
+                            <li>Загрузите вашу статью в одно из облачных хранилищ</li>
+                            <li>Настройте доступ по ссылке (Public или Доступ по ссылке)</li>
+                            <li>Скопируйте ссылку и вставьте в поле ниже</li>
+                        </ol>
+                        
+                        <div class="cloud-services">
+                            <a href="https://drive.google.com" target="_blank" class="cloud-service" id="googleDriveBtn">
+                                <div class="service-icon">
+                                    <i class="fab fa-google-drive"></i>
+                                </div>
+                                <div class="service-info">
+                                    <div class="service-name">Google Drive</div>
+                                    <div class="service-hint">Нажмите для перехода</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://disk.yandex.ru" target="_blank" class="cloud-service" id="yandexDiskBtn">
+                                <div class="service-icon">
+                                    <i class="fab fa-yandex"></i>
+                                </div>
+                                <div class="service-info">
+                                    <div class="service-name">Яндекс.Диск</div>
+                                    <div class="service-hint">Нажмите для перехода</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.dropbox.com" target="_blank" class="cloud-service" id="dropboxBtn">
+                                <div class="service-icon">
+                                    <i class="fab fa-dropbox"></i>
+                                </div>
+                                <div class="service-info">
+                                    <div class="service-name">Dropbox</div>
+                                    <div class="service-hint">Нажмите для перехода</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="url-input-container">
+                        <div class="input-with-icon">
+                            <i class="fas fa-link"></i>
+                            <input type="url" id="file-url" name="file-url" required 
+                                placeholder="https://drive.google.com/file/d/... или https://yadi.sk/d/..."
+                                pattern="https?://.+">
+                        </div>
+                        <div class="url-validation" id="urlValidation"></div>
+                    </div>
+                    
+                    <div class="url-notes">
+                        <div class="note">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Убедитесь, что ссылка работает и доступна без авторизации</span>
+                        </div>
+                        <div class="note">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Файл должен быть в формате: PDF, DOC, DOCX, RTF, TXT</span>
+                        </div>
+                        <div class="note">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Максимальный размер файла: 50 MB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group checkbox">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Я согласен с условиями конкурса и даю согласие на обработку персональных данных *</label>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> Отправить заявку на конкурс
+            </button>
+            
+            <div id="formStatus" class="form-status"></div>
+            
+            <p class="alternative-submit">
+                <i class="fas fa-envelope"></i> Или отправьте статью напрямую на <strong>gemiandrui@gmail.com</strong> 
+                с указанием ФИО, категории и названия статьи.
+            </p>
+        </form>
+    </section>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Конкурс "Наука без границ"</h3>
+                    <p>Даем возможность рассказать о науке каждому!</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-envelope"></i> <span class="contact-email">gemiandrui@gmail.com</span></p>
+                    <p><i class="fas fa-calendar-alt"></i> Приём статей до: 15.01.2026</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li>Физика</li>
+                        <li>Астрономия</li>
+                        <li>Биология</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Конкурс научных статей "Наука без границ". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно успешной отправки -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Спасибо за вашу статью!</h3>
+            <p>Ваша статья успешно отправлена на конкурс. Мы свяжемся с вами по email после проверки.</p>
+            <p>Для участия в конкурсе также необходимо отправить полную версию статьи на почту: <strong>gemiandrui@gmail.com</strong></p>
+            <button class="modal-btn" id="closeModalBtn">Понятно</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
